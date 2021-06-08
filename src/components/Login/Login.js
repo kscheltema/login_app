@@ -12,9 +12,14 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
-      enteredPassword.trim().length > 6 && enteredEmail.includes("@")
-    );
+    const indentifierClear = setTimeout(() => {
+      setFormIsValid(
+        enteredPassword.trim().length > 6 && enteredEmail.includes("@")
+      );
+      return () => {
+        clearTimeout(indentifierClear);
+      };
+    }, 750);
   }, [enteredEmail, enteredPassword]);
   //an example of where dependencies is used
   //no useState value (setTimerIsActive)
