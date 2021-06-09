@@ -11,16 +11,17 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(() => {
-    const indentifierClear = setTimeout(() => {
-      setFormIsValid(
-        enteredPassword.trim().length > 6 && enteredEmail.includes("@")
-      );
-      return () => {
-        clearTimeout(indentifierClear);
-      };
-    }, 750);
-  }, [enteredEmail, enteredPassword]);
+  // useEffect(() => {
+  //   const indentifierClear = setTimeout(() => {
+  //     setFormIsValid(
+  //       enteredPassword.trim().length > 6 && enteredEmail.includes("@")
+  //     );
+  //     return () => {
+  //       clearTimeout(indentifierClear);
+  //     };
+  //   }, 750);
+  // }, [enteredEmail, enteredPassword]);
+
   //an example of where dependencies is used
   //no useState value (setTimerIsActive)
   //no API functions (setTimeOut)
@@ -28,10 +29,16 @@ const Login = (props) => {
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+    setFormIsValid(
+      enteredPassword.trim().length > 6 && enteredEmail.includes("@")
+    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+    setFormIsValid(
+      enteredPassword.trim().length > 6 && enteredEmail.includes("@")
+    );
   };
 
   const validateEmailHandler = () => {
