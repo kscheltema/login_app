@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AuthContext from "./store/auth-context";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import MainHeader from "./components/MainHeader/MainHeader";
@@ -12,7 +13,7 @@ function App() {
     if (storedIsLoggedInInfo === "1") {
       setIsLoggedIn(true);
     }
-  }, []);
+  }, [storedIsLoggedInInfo]);
 
   const loginHandler = (email, password) => {
     // We should of course check email and password
@@ -26,14 +27,22 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  //the Provider as required as an Add-on to AuthContext
+  //because AuthContainer does not have a <div> function
+  //<AuthContext.Provider> also replaces the need for <React.Fragment>
+  //for <AuthContext.Provider> to allow change to the store state need to pass it in like below
   return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+      }}
+    >
+      <MainHeader onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-    </React.Fragment>
+    </AuthContext.Provider>
   );
 }
 
