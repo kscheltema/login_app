@@ -39,6 +39,7 @@ const Login = (props) => {
 
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
+  //bad to have and use*** run on an property, with this object destructuring can target the object within the whole property thus saving resources
 
   useEffect(() => {
     const indentifierClear = setTimeout(() => {
