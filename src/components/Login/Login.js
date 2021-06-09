@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
@@ -37,16 +37,17 @@ const Login = (props) => {
     { value: "", isValid: null }
   );
 
-  // useEffect(() => {
-  //   const indentifierClear = setTimeout(() => {
-  //     setFormIsValid(
-  //       enteredPassword.trim().length > 6 && enteredEmail.includes("@")
-  //     );
-  //     return () => {
-  //       clearTimeout(indentifierClear);
-  //     };
-  //   }, 750);
-  // }, [enteredEmail, enteredPassword]);
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
+  useEffect(() => {
+    const indentifierClear = setTimeout(() => {
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
+    return () => {
+      clearTimeout(indentifierClear);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   //an example of where dependencies is used
   //no useState value (setTimerIsActive)
@@ -56,13 +57,13 @@ const Login = (props) => {
   const emailChangeHandler = (event) => {
     dispatchEmailFunc({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(passwordState.isValid && event.target.value.includes("@"));
+    // setFormIsValid(passwordState.isValid && event.target.value.includes("@"));
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPasswordFunc({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(passwordState.isValid && emailState.isValid);
+    // setFormIsValid(passwordState.isValid && emailState.isValid);
   };
 
   const validateEmailHandler = () => {
