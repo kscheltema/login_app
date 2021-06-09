@@ -39,7 +39,8 @@ const Login = (props) => {
 
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
-  //bad to have and use*** run on an property, with this object destructuring can target the object within the whole property thus saving resources
+  //bad to have and use*** run on an property,
+  //with this object destructuring can target the object within the whole property thus saving resources
 
   useEffect(() => {
     const indentifierClear = setTimeout(() => {
@@ -57,14 +58,10 @@ const Login = (props) => {
 
   const emailChangeHandler = (event) => {
     dispatchEmailFunc({ type: "USER_INPUT", val: event.target.value });
-
-    // setFormIsValid(passwordState.isValid && event.target.value.includes("@"));
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPasswordFunc({ type: "USER_INPUT", val: event.target.value });
-
-    // setFormIsValid(passwordState.isValid && emailState.isValid);
   };
 
   const validateEmailHandler = () => {
