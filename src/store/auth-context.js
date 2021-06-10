@@ -6,6 +6,7 @@ const AuthContext = React.createContext({
   onLogedIn: (email, password) => {},
 });
 //can be as simple as text
+///redux best for multiple changes per minute
 
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
